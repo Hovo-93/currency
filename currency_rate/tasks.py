@@ -10,7 +10,9 @@ import asyncio
 import aiohttp
 from asgiref.sync import sync_to_async
 from currency_rate.models import Currency
-
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 @sync_to_async
 def create_currency(currency_name, usd_to_rub_rate):
@@ -23,7 +25,7 @@ def create_currency(currency_name, usd_to_rub_rate):
 
 @shared_task
 def update_currency():
-    api_key = '58cf8eefee2419244c06c43213de050118518ce1'
+    api_key = os.getenv('KEY_API')
     from_currency = 'USD'
     to_currency = 'RUB'
     amount = 1
